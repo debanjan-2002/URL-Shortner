@@ -1,0 +1,13 @@
+<%- include('../partials/header') %> 
+
+<div class="container">
+    <h1>Edit URL</h1>
+    <form action="/urls/<%= url.short %>?_method=PUT" method="POST" class="my-4 form-inline needs-validation" novalidate>
+        <label for="fullUrl" class="visually-hidden form-label">URL</label>
+        <input type="url" name="fullUrl" id="fullUrl" class="form-control mr-2 col" required value="<%= url.full %>">
+        <button type="submit" class="btn btn-success mt-3">Update</button>
+    </form>
+    <a href="/urls" class="btn btn-light">Back</a>
+</div>
+
+<%- include('../partials/footer') %> 

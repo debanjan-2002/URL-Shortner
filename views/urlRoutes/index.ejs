@@ -1,0 +1,46 @@
+<%- include('../partials/header') %> 
+
+<div class="container">
+    <h1>URL Shortner</h1>
+    <form action="/urls" method="POST" class="my-4 form-inline needs-validation" novalidate>
+        <label for="fullUrl" class="visually-hidden form-label">URL</label>
+        <input type="url" name="fullUrl" id="fullUrl" class="form-control mr-2 col" required>
+        <button type="submit" class="btn btn-success mt-3">Shrink</button>
+    </form>
+    <div class="table-responsive">
+        <table class="table table-striped caption-top">
+            <caption>List of URLs</caption>
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col" class="text-center">Full URL</th>
+                    <th scope="col" class="text-center">Short URL</th>
+                    <th scope="col" class="text-center">Clicks</th>
+                    <th scope="col" class="text-center">Edit</th>
+                    <th scope="col" class="text-center">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let count = 0 %> 
+                <% for(let url of urls) { %>
+                    <tr>
+                        <th scope="row"><%= ++count %></th>
+                        <td class="text-center"><a href="<%= url.full %>"><%= url.full %></a></td>
+                        <td class="text-center"><a href="/urls/<%= url.short %>"><%= url.short %></a></td>
+                        <td class="text-center"><%= url.clicks %></td>
+                        <td class="text-center">
+                            <a href="/urls/<%= url.short %>/edit" class="btn btn-warning">Edit</a>
+                        </td>
+                        <td class="d-flex justify-content-center">
+                            <form action="/urls/<%= url.short %>?_method=DELETE" method="POST">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% } %>  
+            </tbody>
+        </table>           
+    </div>
+</div>
+
+<%- include('../partials/footer') %> 
